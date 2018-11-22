@@ -12133,7 +12133,9 @@ Standard deviation of prices: $165171.13154429477
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> The model have successflly predicted the target variable with a R**2 score of 92.3</p>
+<p><strong>Answer:</strong> <br>
+The model have successflly predicted the target variable with a R^2 score of 92.3 meaning that ~92% of the variance in Y is predicted from X and the model can be explained very well.
+<br>To take it to the extreme, if the variance reduction would be 100%, it means the model fits the data perfectly and all the data points are on the regression line itself.</p>
 
 </div>
 </div>
@@ -12210,7 +12212,10 @@ Standard deviation of prices: $165171.13154429477
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> There is no other way to train an algorithm other than splitting it. As for the ratio, it depends of the variance of the label + the sample size in total. Usually 80/20 should be good fit unless a small sample size is only available in which case a CV with K-fold should be used.</p>
+<p><strong>Answer: </strong> 
+<br>By spliting the data we can avoid overfitting. 
+The explanation is that underfitting is very easy to detect by a low score on the training set, but overfitting may seem like a good fit in terms of the score. Only when we test the data, we will discover the overfitting by seeing a low score due to the lack of generalization of the training set. 
+Further more, one must avoid looking at the testing set and if you are training and testing on the same data - you polute your ability to learn.</p>
 
 </div>
 </div>
@@ -12290,7 +12295,13 @@ Think about the pros and cons of adding more training points based on if the tra
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> It looks like the more depth we have, the training is doing better which also indicates larger variance as a result of overfitting. As a result, we can see that the testing score doesn't get as impacted by it and that the optimal depth is 3 (6 and 10 are doing poorly on their ability to predict), also one can see that the STD reduces after X training points in the max_depth=3 while it stays kind of const on the others</p>
+<p><strong>Answer: </strong> <br>
+The convergence, specially from 300 to 350 points of the curves presented in max_depth=3 shows that is not needed more samples to decrease the error.<br></p>
+<ul>
+<li>The max_depth=1 indicates underfitting because the R2 score is too low and doesn't generalize very well. </li>
+<li>The max_depth=6 is a little bit overfitted and require more data to check if there's convergence between the curves. </li>
+<li>The max_depth=10 is totally overfitted, sice the R2 score is near a constant on 100%. There is no indications of convergence of the curves.</li>
+</ul>
 
 </div>
 </div>
@@ -12357,7 +12368,9 @@ Think about the pros and cons of adding more training points based on if the tra
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> the less depth, the more bias as we assume something about the data and vice versa - the more depth, the more overfitting we have thus more variance is introduced into the model</p>
+<p><strong>Answer: </strong> <br>
+Max depth of 1 has very low score and is underfitting as we can see from the high bias and low variance.
+<br>Max depth of 10 has a higher score but is overfitting as we see the variance increase and the training set score being high while the testing set score decrease. <br>The right spot is the maximum depth from 2 to 3 due to high R2 score from both training and testing and less variance.</p>
 
 </div>
 </div>
@@ -12411,7 +12424,11 @@ Think about the pros and cons of adding more training points based on if the tra
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> Grid search is a method to search through all the different hypoer-parameters combinations for the best one by comparing the score of each combination. An example can be taken from question 5 about the max_depth: the grid search would have go through all the options we provided him and output the best one. 
+<p><strong>Answer: </strong> <br>
+Grid search is a method to search through all the different hypoer-parameters combinations for the best one by comparing the score of each combination. <br>
+The input for a gridSearch is the hyperparameters names and possible values, then the GridSearch tests the different combination and scores to help us discover the best one. The output is the different score for each fit on the testing set.
+<br> That technique could be applied to understand the effect of different parameters and help to choose the better algorithm for specific model and to optimize.
+<br>An example can be taken from question 5 about the max_depth: the grid search would have go through all the options we provided him and output the best one. 
 It's still important to pay attantion for overfitting and underfitting as it won't take them under consideration.</p>
 
 </div>
@@ -12437,12 +12454,12 @@ It's still important to pay attantion for overfitting and underfitting as it won
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> 
-What is the k-fold cross-validation training technique?
-K fold is a type of cross validation where you duplicate the data K times. The data is split into training, CV and testing sets differently for each k fold.</p>
-<p>What benefit does this technique provide for grid search when optimizing a model?
-The issue with grid-search is that it's sensitive for sampling errors and bias especially when the sample size is low.
-That's why using K fold to increase the randomization can help to train a model regardless of a given k sample.</p>
+<p><strong>Answer: </strong></p>
+<p><strong> What is the k-fold cross-validation training technique?<br> </strong>
+K fold is a technique where the data is being split into train and test data sets and then training the train dataset k-1 times. The extra 1 training set is the cross validation. This process is then repeated k times and the average cross validation score is used to check the performance of the model. Once we choose the best hyperparameters and do cross validation we then compare it's score with the testing data to see how our model perform.
+<br><br>
+<strong> What benefit does this technique provide for grid search when optimizing a model?<br> </strong> 
+Grid search can help us avoid underfitting but not overfitting and is very sensitive to bias. But if we use k-fold cross validation it helps us avoid that without actually using our testing data. Since cross validation makes the model lose sample size of the training data, k-fold is super useful and makes up for the lost sample by doing repetitions.</p>
 
 </div>
 </div>
@@ -12680,7 +12697,10 @@ Predicted selling price for Client 3&#39;s home: $931,636.36
 <li>Client 2's home: $237,478.72</li>
 <li>Client 3's home: $931,636.36</li>
 </ul>
-<p>These prices make sense as the best house is close to the max price in the dataset (1024800) and the cheapest house is more than 1 STD above the min price in the dataset.</p>
+<p>The prices are reasonabled so I would follow the recomendations of model. 
+Client 1, expected to have the second highest price since it has the second highest number of rooms, second less poverty level and less and second less student-teacher ratio. <br>
+In general, it seems that the clients are ordered nicely so their features are all ranked the same (first, second and last) so the model can easily predict their prices.
+Also, client number 1 is very close to the mean price ($454342) and less than 1 STD from it so we can understand he represent roughly the average level of houses in this data.</p>
 
 </div>
 </div>
@@ -12764,9 +12784,12 @@ Range in prices: $69,044.61
 What I like most about being a data scientist, is that we are first of all.. scientists!
 And when we run a model or plan an analysis we need to carefully think of all the noisy and intrusive parameters we can face.
 So when meeting this 40 years old dataset, my first reaction was "it can't be useful today anyway".
-Even if you put aside inflation and the missing data like SQM, renovated etc. you need to consider the human factor - people's taste have changed in ways we can't think of - color of the house, the tiles, backyard vs. fromyard etc.
+Even if you put aside inflation and the missing data like SQM, renovated etc. you need to consider the human factor - people's taste have changed in ways we can't think of - color of the house, the tiles, backyard vs. fromyard etc. which relates to hint #2 that some things might be missing from the dataset as well that weren't thought of 40 years ago like kitchen appliances, balcony etc.
 <br>
-Also, the model sensitivity will vary on different cities and areas in the world (city vs. rural vs. village) etc.</p>
+Also, the model sensitivity will vary on different cities and areas in the world (city vs. rural vs. village) etc.<br>
+Based on the variance it seems as the data is robust enough (10%)<br>
+No, rural city has its own features and carachteristics and should be normalized accordingly. <br>
+Must be reviewed if is needed to add or remove features. <br> Absolutly yes, the characteristics of the entire neighborhood tend do indicate better conditions to living and development.</p>
 
 </div>
 </div>
